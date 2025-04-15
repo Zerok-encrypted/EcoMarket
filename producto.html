@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoMarket | Productos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">EcoMarket</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="producto.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4 text-success">Nuestros Productos</h2>
+    <div class="row g-4">
+
+      <!-- Producto 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="img/producto1.jpg" class="card-img-top" alt="Aceite de coco" />
+          <div class="card-body">
+            <h5 class="card-title">Aceite de Coco Orgánico</h5>
+            <p class="card-text">Extra virgen, ideal para cocinar o cuidado personal. 500ml</p>
+            <p class="fw-bold text-success">$120.00 MXN</p>
+            <button class="btn btn-outline-success w-100">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="img/producto2.jpg" class="card-img-top" alt="Té verde" />
+          <div class="card-body">
+            <h5 class="card-title">Té Verde Natural</h5>
+            <p class="card-text">Infusión relajante 100% natural. Bolsa con 20 sobres.</p>
+            <p class="fw-bold text-success">$85.00 MXN</p>
+            <button class="btn btn-outline-success w-100">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="img/producto3.jpg" class="card-img-top" alt="Miel orgánica" />
+          <div class="card-body">
+            <h5 class="card-title">Miel Orgánica de Abeja</h5>
+            <p class="card-text">Pura, sin aditivos ni conservadores. 300g</p>
+            <p class="fw-bold text-success">$150.00 MXN</p>
+            <button class="btn btn-outline-success w-100">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-success text-white text-center py-3">
+    
+    <div class="container">
+      <p class="mb-0">&copy; 2025 EcoMarket. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const botones = document.querySelectorAll('.add-to-cart');
+  
+      botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+          const id = boton.getAttribute('data-id');
+          const nombre = boton.getAttribute('data-nombre');
+          const precio = parseFloat(boton.getAttribute('data-precio'));
+  
+          const producto = { id, nombre, precio, cantidad: 1 };
+  
+          let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  
+          // Verificamos si ya está en el carrito
+          const index = carrito.findIndex(p => p.id === id);
+          if (index !== -1) {
+            carrito[index].cantidad += 1;
+          } else {
+            carrito.push(producto);
+          }
+  
+          localStorage.setItem('carrito', JSON.stringify(carrito));
+          alert(`${nombre} agregado al carrito.`);
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>
